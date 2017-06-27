@@ -1,0 +1,33 @@
+{
+  "name": "photo-sharing-app",
+  "version": "1.0.0",
+  "description": "A group project between [@samirdhebar](https://github.com/samirdhebar) and [@GabeSArn](https://github.com/GabeSArn). A photo sharing application that allows users to comment on, like and upload pictures.",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samirdhebar/photo-sharing-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/samirdhebar/photo-sharing-app/issues"
+  },
+  "homepage": "https://github.com/samirdhebar/photo-sharing-app#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "cookie-parser": "^1.4.3",
+    "dotenv": "^4.0.0",
+    "ejs": "^2.5.6",
+    "express": "^4.15.3",
+    "fs": "0.0.1-security",
+    "multer": "^1.3.0",
+    "nodemon": "^1.11.0",
+    "pg": "^6.4.0",
+    "sequelize": "^4.2.0",
+    "sessions": "0.0.2-7"
+  }
+}

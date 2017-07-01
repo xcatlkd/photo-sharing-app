@@ -51,8 +51,11 @@ A group project between [@samirdhebar](https://github.com/samirdhebar) and [@Gab
 │   └── sql.js                #   Sequelize instance and configuration
 ├── views                     # EJS files for rendering live here
 │    └── pages                #   Where each individual page is kept
+│     └── 404.ejs             #   Where the error page is kept
+│     ├── docs.ejs            #   Where the uploaded pics page is kept              
 │     ├── home.ejs            #   Where the home page is kept
 │     ├── login.ejs           #   Where the login page is kept
+│     ├── upload.ejs           #   Where the upload page is kept
 │     └── signup.ejs          #   Where the signup page is kept
 │    └── template.ejs         #   Main template file
 ```

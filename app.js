@@ -30,9 +30,10 @@ app.use(session({
 // ************** //
 // *** Routes *** //
 // ************** //
+
 app.get("/", function(req, res) {
 	if (req.user) {
-		return res.redirect("/docs");
+		return res.redirect("pics");
 	}
 
 	renderTemplate(req, res, "Welcome", "home");
@@ -41,6 +42,8 @@ app.get("/", function(req, res) {
 app.all("*", function(req, res) {
 	res.status(404);
 	renderTemplate(req, res, "Not Found", "404");
+
+
 });
 
 // *************** //

@@ -30,9 +30,20 @@ app.use(session({
 // ************** //
 // *** Routes *** //
 // ************** //
-app.use("/", snapagramRouter);
-app.get("*", function(req, res) {
-	renderTemplate(res,"404");
+
+app.get("/", function(req, res) {
+	if (req.user) {
+		return res.redirect("pics");
+	}
+
+	renderTemplate(req, res, "Welcome", "home");
+});
+
+app.all("*", function(req, res) {
+	res.status(404);
+	renderTemplate(req, res, "Not Found", "404");
+
+
 });
 
 // *************** //

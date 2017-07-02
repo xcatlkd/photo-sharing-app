@@ -2,7 +2,7 @@ require("dotenv").config;
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require("cookie-parser");
-const session =("express-session");
+const session =require("express-session");
 const connectSessionSequelize = require("connect-session-sequelize");
 
 const sql = require("./util/sql.js");
@@ -25,7 +25,9 @@ app.use(session({
 	secret: cookieSecret,
 	store: new SessionStore({ db: sql }),
 }));
+
 //Add middleware here //
+
 
 // ************** //
 // *** Routes *** //

@@ -16,5 +16,4 @@ else {
 		logging: false,
 	});
 }
-
 module.exports = sql;

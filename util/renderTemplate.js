@@ -3,7 +3,7 @@ function renderTemplate(res, page, title, args, links) {
 		page: page,
 		title: title,
 		args: args,
-
+		error: error,
 	});
 }
 

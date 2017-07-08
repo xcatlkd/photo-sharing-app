@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<form method="post" id="login-form">
+	<h1>Login to Snapagram</h1>
+
+	<% if (typeof error !== "undefined") { %>
+		<div class="error"><%= error %></div>
+	<% } %>
+
+	<input type="text" name="username" placeholder="Username"/>
+	<input type="password" name="password" placeholder="Password"/>
+	<button>Submit</button>
+</form>
+
+<script src="/js/login.js"></script>

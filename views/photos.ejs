@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<h1><%= username %>'s Documents</h1>
+<div class="photos">
+	<% if (message) { %>
+		<p class="photos-message">
+			<%- message %>
+		</p>
+	<% } %>
+
+	<% if (photo && photos.length) { %>
+		<table>
+			<thead>
+				<td>File (link)</td>
+				<td>Type</td>
+				<td>Size</td>
+				<td>Delete</td>
+			</thead>
+			<tbody>
+				<% for (let i = 0; i < photos.length; i++) { %>
+					<tr class="photo" data-fileid="<%- photos[i].get('id') %>">
+						<td>
+							<a href="/photos/photo/<%- photos[i].get('id') %>">
+								<img src="<%- docs[i].getThumbnailSrc() %>"/>
+								<%- photos[i].get("originalName") %>
+							</a>
+						</td>
+						<td>
+							<%- photos[i].get("mimeType") %>
+						</td>
+						<td>
+							<%- photos[i].get("size") %> bytes
+						</td>
+						<td>
+							<button class="photo-delete" data-fileid="<%- photos[i].get('id') %>">
+								X
+							</button>
+						</td>
+					</tr>
+				<% } %>
+			</tbody>
+		</table>
+		<a href="/photos/upload" class="photos-upload">Upload another photo</a>
+	<% } else { %>
+		<p class="photos-none">No photos found<p>
+		<a href="/photos/upload" class="photos-upload">Add photos to your Snapagram!</a>
+	<% } %>
+</div>
+<script src="/js/photos.js"></script>

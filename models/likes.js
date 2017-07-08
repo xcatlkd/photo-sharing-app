@@ -1,5 +1,7 @@
 const Sequelize = require("sequelize");
 const sql = require("../utility/sql");
+const User = require(".//users.js");
+const Photos = require("../photos.js");
 
 
 const Likes = sql.define("like", {
@@ -9,5 +11,7 @@ const Likes = sql.define("like", {
 		autoIncrement: true,
 	},
 });
+
+Likes.hasMany(Photos);
 
 module.exports = Likes;

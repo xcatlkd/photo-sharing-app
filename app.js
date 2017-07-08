@@ -26,7 +26,7 @@ app.use(session({
 	store: new SessionStore({ db: sql }),
 }));
 
-//Add middleware here //
+// Add middleware here //
 
 
 // ************** //
@@ -34,18 +34,17 @@ app.use(session({
 // ************** //
 
 app.get("/", function(req, res) {
-	if (req.user) {
-		return res.redirect("pics");
-	}
-
-	renderTemplate(req, res, "Welcome", "home");
+	res.render("home");
+	// if (req.user) {
+	// 	return res.redirect("pics");
+	// }
+	//
+	// renderTemplate(req, res, "Welcome", "home");
 });
 
 app.all("*", function(req, res) {
 	res.status(404);
 	renderTemplate(req, res, "Not Found", "404");
-
-
 });
 
 // *************** //

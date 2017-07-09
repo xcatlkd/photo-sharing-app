@@ -4,7 +4,7 @@ function renderTemplate(req, res, page, title, args, error) {
 		title: title,
 		args: args,
 		error: error,
-		// isLoggedIn: !!req.user,
+		isLoggedIn: !!req.user,
 	});
 }
 

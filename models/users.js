@@ -16,6 +16,7 @@ const Users = sql.define("user", {
 	username: {
 		type: Sequelize.STRING,
 		notNull: true,
+		unique: true,
 	},
 	password: {
 		type: Sequelize.STRING(500),
@@ -33,6 +34,10 @@ Users.signup = function(req) {
 		return user;
 	});
 };
+
+Users.login = function(req) {
+	// Check to see if Username already exists.
+},
 
 // Users.hasMany(Photos);
 // Users.hasMany(Comments);

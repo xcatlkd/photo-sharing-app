@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 const sql = require("../utility/sql");
-const User = require(".//users.js");
-const Photos = require("../photos.js");
+const User = require("./users.js");
+const Photos = require("./photos.js");
 
 
 const Likes = sql.define("like", {

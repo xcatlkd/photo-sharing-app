@@ -42,6 +42,14 @@ app.get("/", function(req, res) {
 	// renderTemplate(req, res, "Welcome", "home");
 });
 
+app.get("/signup", function(req,res) {
+	res.render("signup");
+});
+
+app.get("/login", function(req,res) {
+	res.render("login");
+});
+
 app.all("*", function(req, res) {
 	res.status(404);
 	renderTemplate(req, res, "Not Found", "404");

@@ -1,10 +1,10 @@
 function renderTemplate(req, res, page, title, args, error) {
 	return res.render("template", {
-		page: page,
+		page: "Snap",
 		title: title,
 		args: args,
 		error: error,
-		isLoggedIn: !!req.user,
+		// isLoggedIn: !!req.user,
 	});
 }
 

@@ -46,13 +46,16 @@ app.get("/signup", function(req,res) {
 	res.render("signup");
 });
 
+app.post("/signup", function(req,res){
+	// Send info to Database
+});
+
 app.get("/login", function(req,res) {
 	res.render("login");
 });
 
 app.all("*", function(req, res) {
-	res.status(404);
-	renderTemplate(req, res, "Not Found", "404");
+	res.render("404");
 });
 
 // *************** //

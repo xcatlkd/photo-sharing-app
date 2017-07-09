@@ -6,7 +6,7 @@ const BodyParser = require("body-parser");
 const multer = require("multer");
 
 router.get("/", function(req, res) {
-	renderTemplate(res, "home", "Home", {
+	renderTemplate(req, res, "home", "Home", {
 	});
 });
 

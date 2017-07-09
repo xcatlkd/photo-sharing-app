@@ -6,11 +6,18 @@ const Likes = require("./likes.js");
 
 const Photos = sql.define("photos", {
 	id: {
-		type: Sequelize.INTEGER,
+		type: Sequelize.STRING,
 		primaryKey: true,
-		autoIncrement: true,
 	},
-	user: {
+	size: {
+		type: Sequelize.INTEGER,
+		notNull: true,
+	},
+	originalName: {
+		type: Sequelize.STRING,
+		notNull: true,
+	},
+	mimeType: {
 		type: Sequelize.STRING,
 		notNull: true,
 	},

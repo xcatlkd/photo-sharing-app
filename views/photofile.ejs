@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<div class="photo-file">
+	<h1><%- file.get("originalName") %></h1>
+	<% if (file.getPreviewSrc()) { %>
+		<img class="photo-preview" src="<%- file.getPreviewSrc() %>"/>
+	<% } else { %>
+		<div class="photo-preview noPreview">No preview available</div>
+	<% } %>
+
+	<a class="photo-download button" href="/docs/download/<%- file.get('id') %>">Download</a>
+</div>

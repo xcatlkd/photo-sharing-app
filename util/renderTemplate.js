@@ -1,10 +1,8 @@
-function renderTemplate(req, res, page, title, args, error) {
+function renderTemplate(res, title, page, args) {
 	return res.render("template", {
-		page: "Snap",
-		title: title,
+		page: page,
+		title: title || "Hey Mom",
 		args: args,
-		error: error,
-		// isLoggedIn: !!req.user,
 	});
 }
 

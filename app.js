@@ -35,19 +35,14 @@ app.use(session({
 
 app.get("/", function(req, res) {
 	res.render("home");
-	// if (req.user) {
-	// 	return res.redirect("pics");
-	// }
-	//
-	// renderTemplate(req, res, "Welcome", "home");
 });
 
 app.get("/signup", function(req,res) {
 	res.render("signup");
 });
 
-app.post("/signup", function(req,res){
-	// Send info to Database
+app.post("/signup", function(req,res) {
+	res.send("GO");
 });
 
 app.get("/login", function(req,res) {

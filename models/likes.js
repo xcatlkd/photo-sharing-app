@@ -12,6 +12,10 @@ const Likes = sql.define("like", {
 	},
 });
 
+
 // Likes.hasMany(Photos);
+
+// Likes.hasOne(User);
+
 
 module.exports = Likes;

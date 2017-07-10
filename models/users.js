@@ -6,6 +6,20 @@ const Jimp = require("jimp"); // An image processing library for Node written en
 const bcrypt = require("bcrypt"); // Password hashing
 const fs = require("fs-extra"); // Adds extra file system methods
 
+// Password Hashing
+
+function hashPassword(user) {
+	if (user.password) {
+		return bcrypt.genSalt()
+		.then(function(salt) {
+			return bcrypt.hash(user.password, salt);
+		})
+		.then(function(hashedPw) {
+			user.password = hashedPw;
+		});
+	}
+}
+
 
 const Users = sql.define("user", {
 	id: {
@@ -22,6 +36,11 @@ const Users = sql.define("user", {
 		type: Sequelize.STRING(500),
 		notNull: true,
 	},
+	}, {
+	hooks: {
+		beforeCreate: hashPassword,
+		beforeUpdate: hashPassword,
+	},
 });
 
 Users.signup = function(req) {
@@ -36,7 +55,7 @@ Users.signup = function(req) {
 };
 
 Users.login = function(req) {
-	// Check to see if Username already exists.
+	// return Users.
 },
 
 // Users.hasMany(Photos);

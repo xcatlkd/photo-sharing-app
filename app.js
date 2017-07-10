@@ -43,7 +43,7 @@ app.get("/signup", function(req,res) {
 });
 
 app.post("/signup", function(req,res) {
-	Users.signup(req).then(function(error, user){
+	Users.signup(req).then(function(error, user) {
 		if (!error) {
 			res.send("Uploaded to database.");
 		} else {

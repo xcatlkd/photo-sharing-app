@@ -1,7 +1,6 @@
 const Sequelize = require("sequelize");
 const sql = require("../util/sql.js");
 const User = require("./users.js");
-const bodyParser = require('body-parser');
 
 
 const Comments = sql.define("comments", {
@@ -9,6 +8,7 @@ const Comments = sql.define("comments", {
 		type: Sequelize.INTEGER,
 		notNull: true,
 		primaryKey: true,
+		autoIncrement: true,
 	},
 	text: {
 		type: Sequelize.STRING,

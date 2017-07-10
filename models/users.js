@@ -5,7 +5,7 @@ const Comments = require("./comments.js");
 const Jimp = require("jimp"); // An image processing library for Node written entirely in JavaScript
 const bcrypt = require("bcrypt"); // Password hashing
 const fs = require("fs-extra"); // Adds extra file system methods
-const bodyParser = require('body-parser');
+
 
 const Users = sql.define("user", {
 	id: {

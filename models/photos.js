@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 const sql = require("../util/sql.js");
 const User = require("./users.js");
 const Likes = require("./likes.js");
-const bodyParser = require('body-parser');
+
 
 
 const Photos = sql.define("photos", {

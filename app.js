@@ -43,12 +43,20 @@ app.get("/signup", function(req,res) {
 });
 
 app.post("/signup", function(req,res) {
-	Users.signup(req);
-	res.send("Uploaded to database.");
+	Users.signup(req).then(function(error, user){
+		if (!error) {
+			res.send("Uploaded to database.");
+		} else {
+			res.redirect("404");
+		}
+	});
 });
 
 app.get("/login", function(req,res) {
 	res.render("login");
+});
+
+app.post("/login", function(req,res) {
 });
 
 app.all("*", function(req, res) {

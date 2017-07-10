@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize");
-const sql = require("../utility/sql");
+const sql = require("../util/sql.js");
 const User = require("./users.js");
 const Photos = require("./photos.js");
 
@@ -12,6 +12,10 @@ const Likes = sql.define("like", {
 	},
 });
 
-Likes.hasOne(User);
+
+// Likes.hasMany(Photos);
+
+// Likes.hasOne(User);
+
 
 module.exports = Likes;

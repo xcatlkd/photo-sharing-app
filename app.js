@@ -43,9 +43,9 @@ app.get("/signup", function(req,res) {
 });
 
 app.post("/signup", function(req,res) {
-	Users.signup(req).then(function(error, user) {
-		if (!error) {
-			res.send("Uploaded to database.");
+	Users.signup(req).then(function(user) {
+		if (user) {
+			res.redirect("success");
 		} else {
 			res.redirect("404");
 		}
@@ -57,6 +57,18 @@ app.get("/login", function(req,res) {
 });
 
 app.post("/login", function(req,res) {
+	// Users.login(req).then(function(user) {
+	// 	if (user) {
+	// 		res.redirect("success");
+	// 	}
+	// 	else {
+	// 		res.redirect("404");
+	// 	}
+	// });
+});
+
+app.get("/success", function(req,res) {
+	res.render("success");
 });
 
 app.all("*", function(req, res) {

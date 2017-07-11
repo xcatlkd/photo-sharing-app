@@ -20,6 +20,18 @@ function hashPassword(user) {
 	}
 }
 
+function checkUsername(req) {
+	Users.findAll({
+		where: {
+			username: req.body.username,
+		},
+	}).then(function() {
+		if (req.body) {
+			console.log("Already taken pansie.");
+		}
+	});
+}
+
 
 const Users = sql.define("user", {
 	id: {
@@ -36,7 +48,8 @@ const Users = sql.define("user", {
 		type: Sequelize.STRING(500),
 		notNull: true,
 	},
-	}, {
+},
+	{
 	hooks: {
 		beforeCreate: hashPassword,
 		beforeUpdate: hashPassword,
@@ -55,7 +68,7 @@ Users.signup = function(req) {
 };
 
 Users.login = function(req) {
-	// return Users.
+	checkUsername(req);
 },
 
 // Users.hasMany(Photos);

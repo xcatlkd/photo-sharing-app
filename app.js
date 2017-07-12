@@ -68,14 +68,14 @@ app.get("/login", function(req,res) {
 });
 
 app.post("/login", function(req,res) {
-	// Users.login(req).then(function(user) {
-	// 	if (user) {
-	// 		res.redirect("success");
-	// 	}
-	// 	else {
-	// 		res.redirect("404");
-	// 	}
-	// });
+	User.login(req,res).then(function(user) {
+		if (user) {
+			res.redirect("success");
+		}
+		else {
+			res.redirect("404");
+		}
+	});
 });
 
 app.get("/success", function(req,res) {

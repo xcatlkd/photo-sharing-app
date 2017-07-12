@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const connectSessionSequelize = require("connect-session-sequelize");
-const Users = require("./models/users.js");
+const User = require("./models/user.js");
 
 const sql = require("./util/sql.js");
 const snapagramRouter = require("./routes/snapagram.js");
@@ -43,11 +43,22 @@ app.get("/signup", function(req,res) {
 });
 
 app.post("/signup", function(req,res) {
-	Users.signup(req).then(function(user) {
+	User.signup(req).then(function(user) {
 		if (user) {
 			res.redirect("success");
-		} else {
+		}
+		else {
 			res.redirect("404");
+		}
+	}).catch(function(error) {
+		if (!req.body.username) {
+			res.redirect("signup");
+		}
+		else if (!req.body.password) {
+			res.redirect("signup");
+		}
+		else {
+			console.log("You had a error: ", error);
 		}
 	});
 });

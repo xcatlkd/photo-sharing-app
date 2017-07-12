@@ -1,11 +1,11 @@
 const Sequelize = require("sequelize");
 const sql = require("../util/sql.js");
-const User = require("./users.js");
-const Likes = require("./likes.js");
+const User = require("./user.js");
+const Like = require("./like.js");
 
 
 
-const Photos = sql.define("photos", {
+const Photo = sql.define("photo", {
 	id: {
 		type: Sequelize.STRING,
 		primaryKey: true,
@@ -24,8 +24,7 @@ const Photos = sql.define("photos", {
 	},
 });
 
-// Photos.hasOne(User);
+
 // Photos.hasMany(Likes);
 
-
-module.exports = Photos;
+module.exports = Photo;

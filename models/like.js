@@ -1,10 +1,10 @@
 const Sequelize = require("sequelize");
 const sql = require("../util/sql.js");
-const User = require("./users.js");
-const Photos = require("./photos.js");
+const User = require("./user.js");
+const Photo = require("./photo.js");
 
 
-const Likes = sql.define("like", {
+const Like = sql.define("like", {
 	id: {
 		type: Sequelize.INTEGER,
 		primaryKey: true,
@@ -18,4 +18,4 @@ const Likes = sql.define("like", {
 // Likes.hasOne(User);
 
 
-module.exports = Likes;
+module.exports = Like;

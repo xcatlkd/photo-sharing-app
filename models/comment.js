@@ -1,9 +1,9 @@
 const Sequelize = require("sequelize");
 const sql = require("../util/sql.js");
-const User = require("./users.js");
-const Likes = require("./likes.js");
+const User = require("./user.js");
+const Like = require("./like.js");
 
-const Comments = sql.define("comments", {
+const Comment = sql.define("comment", {
 	id: {
 		type: Sequelize.INTEGER,
 		notNull: true,
@@ -16,6 +16,6 @@ const Comments = sql.define("comments", {
 	},
 });
 
-Comments.hasMany(Likes);
+Comment.hasMany(Like);
 
-module.exports = Comments;
+module.exports = Comment;

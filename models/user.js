@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 const sql = require("../util/sql.js");
-const Photos = require("./photos.js");
-const Comments = require("./comments.js");
+const Photo = require("./photo.js");
+const Comment = require("./comment.js");
 const Jimp = require("jimp"); // An image processing library for Node written entirely in JavaScript
 const bcrypt = require("bcrypt"); // Password hashing
 const fs = require("fs-extra"); // Adds extra file system methods
@@ -20,8 +20,20 @@ function hashPassword(user) {
 	}
 }
 
+function checkUsername(req) {
+	User.findAll({
+		where: {
+			username: req.body.username,
+		},
+	}).then(function() {
+		if (req.body) {
+			console.log("Already taken pansie.");
+		}
+	});
+}
 
-const Users = sql.define("user", {
+
+const User = sql.define("user", {
 	id: {
 		type: Sequelize.INTEGER,
 		autoIncrement: true,
@@ -36,15 +48,16 @@ const Users = sql.define("user", {
 		type: Sequelize.STRING(500),
 		notNull: true,
 	},
-	}, {
+},
+	{
 	hooks: {
 		beforeCreate: hashPassword,
 		beforeUpdate: hashPassword,
 	},
 });
 
-Users.signup = function(req) {
-	return Users.create({
+User.signup = function(req) {
+	return User.create({
 		username: req.body.username,
 		password: req.body.password,
 	})
@@ -54,11 +67,11 @@ Users.signup = function(req) {
 	});
 };
 
-Users.login = function(req) {
-	// return Users.
+User.login = function(req) {
+	checkUsername(req);
 },
 
-// Users.hasMany(Photos);
-// Users.hasMany(Comments);
+User.hasMany(Photo);
+User.hasMany(Comment);
 
-module.exports = Users;
+module.exports = User;

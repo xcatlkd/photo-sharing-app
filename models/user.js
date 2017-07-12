@@ -24,9 +24,10 @@ function checkUsername(req, res) {
 	return User.findOne({
 		where: {
 			username: req.body.username,
+			password: req.body.password,
 		},
 	}).then(function() {
-		if (req.body.username) {
+		if (req.body.username && req.body.password) {
 			res.send("success");
 		}
 	});
@@ -64,7 +65,7 @@ User.signup = function(req) {
 	.then(function(user) {
 		req.session.userid = user.id;
 		return user;
-	}).catch(function(error){
+	}).catch(function(error) {
 		console.log("This>>>>", error);
 	});
 };

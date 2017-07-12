@@ -20,14 +20,14 @@ function hashPassword(user) {
 	}
 }
 
-function checkUsername(req) {
-	User.findAll({
+function checkUsername(req, res) {
+	return User.findOne({
 		where: {
 			username: req.body.username,
 		},
 	}).then(function() {
-		if (req.body) {
-			console.log("Already taken pansie.");
+		if (req.body.username) {
+			res.send("success");
 		}
 	});
 }
@@ -64,12 +64,14 @@ User.signup = function(req) {
 	.then(function(user) {
 		req.session.userid = user.id;
 		return user;
+	}).catch(function(error){
+		console.log("This>>>>", error);
 	});
 };
 
-User.login = function(req) {
-	checkUsername(req);
-},
+User.login = function(req,res) {
+	return checkUsername(req,res);
+};
 
 User.hasMany(Photo);
 User.hasMany(Comment);

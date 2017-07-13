@@ -1,22 +1,24 @@
-<!DOCTYPE html>
-
-<link rel="stylesheet" type="text/css" href="/css/normalize.css"/>
-<link rel="stylesheet" type="text/css" href="/css/skeleton.css"/>
-<link rel="stylesheet" type="text/css" href="/css/style.css"/>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-
-<form method="post" id="login-form">
-	<h1>Login to Snapagram</h1>
-
-	<% if (typeof error !== "undefined") { %>
-		<div class="error"><%= error %></div>
-	<% } %>
-
-	<input type="text" name="username" placeholder="Username"/>
-	<input type="password" name="password" placeholder="Password"/>
-	<button>Submit</button>
-</form>
+<html>
+	<head>
+		<title>Snapagram</title>
+		<link rel="import" href="template.ejs">
+		<link rel="stylesheet" types="text.css" href="/css/cssReset.css">
+		<link rel="stylesheet" type="text/css" href="/css/normalize.css"/>
+		<link rel="stylesheet" type="text/css" href="/css/skeleton.css"/>
+		<link rel="stylesheet" type="text/css" href="/css/style.css"/>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	</head>
+	<body>
+		<form method="post" id="login-form">
+			<h1>Login to Snapagram</h1>
+			<% if (typeof error !== "undefined") { %>
+				<div class="error"><%= error %></div>
+				<% } %>
+			<input type="text" name="username" placeholder="Username"/>
+			<input type="password" name="password" placeholder="Password"/>
+			<button>Submit</button>
+		</form>
+	</body>
+</html>
 
 <!-- <script src="/js/login.js"></script> -->

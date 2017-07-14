@@ -20,17 +20,23 @@ function hashPassword(user) {
 	}
 }
 
-function checkUsername(req, res) {
+function checkUsername(req, res, username) {
 	return User.findOne({
 		where: {
 			username: req.body.username,
-			password: req.body.password,
 		},
-	}).then(function() {
-		if (req.body.username && req.body.password) {
-			res.send("success");
+	}).then(function(user) {
+		if (user) {
+			return true;
+		}
+		else {
+			return false;
 		}
 	});
+}
+
+function checkPassword(req,res) {
+
 }
 
 
@@ -71,7 +77,8 @@ User.signup = function(req) {
 };
 
 User.login = function(req,res) {
-	return checkUsername(req,res);
+	// return checkUsername(req,res).then(function(){
+	// });
 };
 
 User.hasMany(Photo);

@@ -5,10 +5,13 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const connectSessionSequelize = require("connect-session-sequelize");
 const User = require("./models/user.js");
+const Photo = require("./models/photo.js");
 
 const sql = require("./util/sql.js");
 const snapagramRouter = require("./routes/snapagram.js");
 const renderTemplate = require("./util/renderTemplate.js");
+const multer  = require('multer');
+const upload = multer({ dest: 'assets/uploads/' });
 
 
 const app = express();
@@ -45,10 +48,11 @@ app.get("/signup", function(req,res) {
 app.post("/signup", function(req,res) {
 	User.signup(req).then(function(user) {
 		if (user) {
-			res.redirect("success");
+			res.redirect("success"); // Should go to userHome page.
+			// userHome page should have upload function and view pics.
 		}
 		else {
-			res.redirect("404");
+			res.redirect("signup");
 		}
 	}).catch(function(error) {
 		if (!req.body.username) {
@@ -77,6 +81,17 @@ app.post("/login", function(req,res) {
 		}
 	});
 });
+
+app.get("/upload", function(req, res) {
+	res.render("upload");
+});
+
+app.post("/upload", upload.single('file'), function(req,res,next) {
+	Photo.make(req);
+	res.render("test", {image: req.file});
+});
+
+
 
 app.get("/success", function(req,res) {
 	res.render("success");

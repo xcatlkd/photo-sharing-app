@@ -78,7 +78,9 @@ app.get("/login", function(req,res) {
 app.post("/login", function(req,res) {
 	User.login(req,res).then(function(user) {
 		if (user) {
-			res.redirect("success");
+			res.render("test", {
+				name: req.body.username,
+			});
 		}
 		else {
 			res.redirect("404");

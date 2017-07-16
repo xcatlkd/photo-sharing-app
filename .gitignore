@@ -2,4 +2,8 @@
 node_modules
 .DS_Store
 *.log
-uploads
+assets/files/*
+assets/previews/*
+assets/thumbnails/*
+assets/uploads/*
+

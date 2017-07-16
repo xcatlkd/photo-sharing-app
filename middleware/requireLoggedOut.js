@@ -7,4 +7,4 @@ function requiredLoggedOut (req, res, next) {
         }
 }
 
-module.exports = requireLoggedOut;
+module.exports = requiredLoggedOut;

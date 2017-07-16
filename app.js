@@ -31,6 +31,9 @@ app.use(session({
 }));
 
 // Add middleware here //
+const deserializeUser = require("./middleware/deserializeUser.js");
+const requireLoggedIn = require("./middleware/requireLoggedIn.js");
+const requiredLoggedOut = require("./middleware/requireLoggedOut.js");
 
 
 // ************** //
@@ -48,8 +51,9 @@ app.get("/signup", function(req,res) {
 app.post("/signup", function(req,res) {
 	User.signup(req).then(function(user) {
 		if (user) {
-			res.redirect("success"); // Should go to userHome page.
-			// userHome page should have upload function and view pics.
+			res.render("test", {
+				name: req.body.username,
+			});
 		}
 		else {
 			res.redirect("signup");
@@ -82,19 +86,24 @@ app.post("/login", function(req,res) {
 	});
 });
 
-app.get("/upload", function(req, res) {
+app.get("/upload", requireLoggedIn, function(req, res) {
 	res.render("upload");
 });
 
-app.post("/upload", upload.single('file'), function(req,res,next) {
+app.post("/upload", requireLoggedIn, upload.single('file'), function(req,res,next) {
 	Photo.make(req);
 	res.render("test", {image: req.file});
 });
 
 
-
 app.get("/success", function(req,res) {
 	res.render("success");
+});
+
+
+app.get("/logout", function(req,res) {
+	req.logout();
+	res.redirect("/");
 });
 
 app.all("*", function(req, res) {

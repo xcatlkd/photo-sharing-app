@@ -7,4 +7,4 @@ function requireLoggedIn(req, res, next) {
         }
 }
 
-module.exports = requiredLoggedIn;
+module.exports = requireLoggedIn;

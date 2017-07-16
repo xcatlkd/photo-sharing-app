@@ -35,8 +35,19 @@ function checkUsername(req, res, username) {
 	});
 }
 
-function checkPassword(req,res) {
-
+function checkIdentity(req,res) {
+	return User.findOne({
+		where: {
+			username: req.body.username,
+		},
+	}).then(function(user) {
+		if (user) {
+			return bcrypt.compare(req.body.password, user.get("password"));
+		}
+		else {
+			return false;
+		}
+	});
 }
 
 
@@ -77,8 +88,17 @@ User.signup = function(req) {
 };
 
 User.login = function(req,res) {
-	// return checkUsername(req,res).then(function(){
-	// });
+	return checkIdentity(req,res).then(function(isValid) {
+		if (isValid) {
+			res.redirect("success");
+		}
+		else {
+			res.status(400).send("Nope. Try Again");
+		}
+	}).catch(function(err) {
+		console.error(err);
+		res.status(500).send("Start Over");
+	});
 };
 
 User.hasMany(Photo);

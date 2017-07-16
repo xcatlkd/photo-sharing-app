@@ -18,6 +18,11 @@ const app = express();
 const cookieSecret = process.env.COOKIE_SECRET || "dev";
 const SessionStore = connectSessionSequelize(session.Store);
 
+// Add middleware here //
+const deserializeUser = require("./middleware/deserializeUser.js");
+const requireLoggedIn = require("./middleware/requireLoggedIn.js");
+const requiredLoggedOut = require("./middleware/requireLoggedOut.js");
+
 // ********************* //
 // *** Configuration *** //
 // ********************* //
@@ -29,11 +34,9 @@ app.use(session({
 	secret: cookieSecret,
 	store: new SessionStore({ db: sql }),
 }));
+app.use(deserializeUser);
 
-// Add middleware here //
-const deserializeUser = require("./middleware/deserializeUser.js");
-const requireLoggedIn = require("./middleware/requireLoggedIn.js");
-const requiredLoggedOut = require("./middleware/requireLoggedOut.js");
+
 
 
 // ************** //

@@ -41,6 +41,7 @@ Photo.make = function(req) {
 
 
 
-// Photos.hasMany(Likes);
+Photos.hasMany(Like);
+Photos.hasMany(Comment);
 
 module.exports = Photo;

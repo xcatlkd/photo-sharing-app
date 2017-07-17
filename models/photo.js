@@ -3,6 +3,8 @@ const sql = require("../util/sql.js");
 const User = require("./user.js");
 const Like = require("./like.js");
 const Jimp = require("jimp"); //
+const Comment = require("./comment.js");
+const CommentLike = require("./commentLike.js");
 
 const Photo = sql.define("photo", {
 	id: {
@@ -20,26 +22,40 @@ const Photo = sql.define("photo", {
 	mimeType: {
 		type: Sequelize.STRING,
 		notNull: true,
+
+	description: {
+		type: Sequelize.STRING(200),
 	},
+	filename: {
+		type: Sequelize.STRING,
+		notNull: true,
+	}
+	},
+
 });
 
-Photo.make = function(req) {
-	return Photo.create({
-		id: req.file.filename,
-		size: req.file.size,
-		originalName: req.file.originalname,
-		mimeType: req.file.mimetype,
-	}).then(function() {
-		if (req.file.mimetype.includes("image/")) {
-			Jimp.read(req.file.path).then(function(img) {
-				img.quality(80);
-				img.resize(Jimp.AUTO, 400);
-			});
-		}
-	});
+File.prototype.getThumbnailSrc = function() {
+	// Check if I have a thumbnail available in assets/thumbnails!
+	// Otherwise return this default icon
+	const filePath = "/thumbnails/" + this.get("id") + ".jpg";
+	if (fs.existsSync("assets" + filePath)) {
+		return filePath;
+	}
+	else {
+		return "/icons/file.svg";
+	}
 };
 
+File.prototype.getPreviewSrc = function() {
+	// Check if I have a preview available in assets/previews!
+	// Otherwise return null, to display a "no preview" message
+	const filePath = "/previews/" + this.get("id") + ".jpg";
+	if (fs.existsSync("assets" + filePath)) {
+		return filePath;
+	}
 
+	return null;
+};
 
 Photos.hasMany(Like);
 Photos.hasMany(Comment);

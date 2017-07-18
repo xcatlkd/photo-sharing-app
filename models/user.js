@@ -90,7 +90,9 @@ User.signup = function(req) {
 User.login = function(req,res) {
 	return checkIdentity(req,res).then(function(isValid) {
 		if (isValid) {
-			res.redirect("success");
+			res.render("test", {
+				name: req.body.username,
+			});
 		}
 		else {
 			res.status(400).send("Nope. Try Again");

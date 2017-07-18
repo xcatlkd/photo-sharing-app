@@ -79,13 +79,11 @@ app.get("/login", function(req,res) {
 });
 
 app.post("/login", function(req,res) {
+	console.log('LOGIN');
 	User.login(req,res).then(function(user) {
 		if (user) {
-			res.render("test", {
-				name: req.body.username,
-			});
-		}
-		else {
+			res.render("photos");
+		} else {
 			res.redirect("404");
 		}
 	});
@@ -96,13 +94,20 @@ app.get("/upload", requireLoggedIn, function(req, res) {
 });
 
 app.post("/upload", requireLoggedIn, upload.single('file'), function(req,res,next) {
-	Photo.make(req);
-	res.render("test", {image: req.file});
+	console.log('UPLOAD');
+	Photo.make(req).then(function() {
+		res.redirect("/photos");
+	});
 });
 
 
-app.get("/success", function(req,res) {
-	res.render("success");
+app.get("/photos", function(req,res) {
+	Photo.findAll().then(function(photos) {
+		console.log(photos);
+		res.render("photos", {
+			photos: photos,
+		});
+	});
 });
 
 

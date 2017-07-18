@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize");
-const sql - require("../util/sql");
+const sql = require("../util/sql");
 
 const commentLikes = sql.define("commentLike", {
     id: {

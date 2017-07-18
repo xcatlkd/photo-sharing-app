@@ -5,10 +5,11 @@ const Like = require("./like.js");
 const Jimp = require("jimp"); //
 const Comment = require("./comment.js");
 const CommentLike = require("./commentLike.js");
+const fs = require("fs");
 
 const Photo = sql.define("photo", {
 	id: {
-		type: Sequelize.STRING,
+		type: Sequelize.INTEGER,
 		primaryKey: true,
 	},
 	size: {
@@ -34,10 +35,26 @@ const Photo = sql.define("photo", {
 
 });
 
-File.prototype.getThumbnailSrc = function() {
+Photo.make = function(req) {
+ 	return Photo.create({
+ 		id: req.file.filename,
+ 		size: req.file.size,
+ 		originalName: req.file.originalname,
+ 		mimeType: req.file.mimetype,
+ 	}).then(function() {
+ 		if (req.file.mimetype.includes("image/")) {
+ 			Jimp.read(req.file.path).then(function(img) {
+ 				img.quality(80);
+ 				img.resize(Jimp.AUTO, 400);
+ 			});
+ 		}
+ 	});
+ };
+
+Photo.prototype.getThumbnailSrc = function() {
 	// Check if I have a thumbnail available in assets/thumbnails!
 	// Otherwise return this default icon
-	const filePath = "/thumbnails/" + this.get("id") + ".jpg";
+	const filePath = "/uploads/" + this.get("id") + ".jpg";
 	if (fs.existsSync("assets" + filePath)) {
 		return filePath;
 	}
@@ -46,10 +63,10 @@ File.prototype.getThumbnailSrc = function() {
 	}
 };
 
-File.prototype.getPreviewSrc = function() {
+Photo.prototype.getPreviewSrc = function() {
 	// Check if I have a preview available in assets/previews!
 	// Otherwise return null, to display a "no preview" message
-	const filePath = "/previews/" + this.get("id") + ".jpg";
+	const filePath = "/uploads/" + this.get("id") + ".jpg";
 	if (fs.existsSync("assets" + filePath)) {
 		return filePath;
 	}
@@ -57,7 +74,7 @@ File.prototype.getPreviewSrc = function() {
 	return null;
 };
 
-Photos.hasMany(Like);
-Photos.hasMany(Comment);
+Photo.hasMany(Like);
+Photo.hasMany(Comment);
 
 module.exports = Photo;

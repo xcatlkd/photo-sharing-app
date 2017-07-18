@@ -54,7 +54,7 @@ app.get("/signup", function(req,res) {
 app.post("/signup", function(req,res) {
 	User.signup(req).then(function(user) {
 		if (user) {
-			res.render("test", {
+			res.render("photos", {
 				name: req.body.username,
 			});
 		}

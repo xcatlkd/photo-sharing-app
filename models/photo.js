@@ -4,7 +4,6 @@ const User = require("./user.js");
 const Like = require("./like.js");
 const Jimp = require("jimp"); //
 const Comment = require("./comment.js");
-const CommentLike = require("./commentLike.js");
 const fs = require("fs");
 
 const Photo = sql.define("photo", {

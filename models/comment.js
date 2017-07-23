@@ -16,6 +16,18 @@ const Comment = sql.define("comment", {
 	},
 });
 
+Comment.update = function(req) {
+	return Comment.create({
+		text: req.body.text,
+	})
+	.then(function(comment){
+		req.session.id = comment.id;
+		return comment;
+	}).catch(function(error){
+		console.log(error);
+	});
+};
+
 Comment.hasMany(Like);
 
 module.exports = Comment;

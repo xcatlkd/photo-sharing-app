@@ -108,6 +108,15 @@ app.get("/photos", function(req,res) {
 	});
 });
 
+// How do I verify if a comment is attached to the right photo?
+app.post("/photos", function(req, res) {
+	Comment.update().then(function(comments) {
+		res.render("photos", {
+			comments: comments,
+		});
+	});
+});
+
 
 app.get("/logout", function(req,res) {
 	req.logout();

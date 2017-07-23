@@ -18,7 +18,7 @@
 
 
 	<div class = "navbar-nav">
-			<a href = "/photos" class = "page-link align-items-start">Home</a>
+			<a href = "/photos" class = "page-link">Home</a>
 			<a href = "/" class = "page-link">Logout</a>
 			<a href = "/upload" class="page-link">Upload Something</a>
 	</div>
@@ -29,6 +29,8 @@
 					<a href = "/uploads/<%- photos[i].get('id') %>">
 						<img class= "gallery-image" src = "/uploads/<%- photos[i].get('id') %>"/>
 					<% } %>
+			</p>
+			<div class = "text-box"></div>
 		</div>
 	</div>
 	<script src="/js/photos.js"></script>

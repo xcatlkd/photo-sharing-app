@@ -10,7 +10,15 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
-<body>
+<div class - "container">
+    <div class = "navbar-nav">
+        <a href = "/photos" class = "page-link">Home</a>
+         <a href = "/logout" class = "page-link">Logout</a>
+    </div>
+</div>
+
+
+<body class = "text-center">
 	<form class="upload" enctype="multipart/form-data" method="post">
 		<% if (typeof error !== "undefined") { %>
 			<p class="upload-error">
@@ -18,6 +26,6 @@
 			</p>
 		<% } %>
 		<input type="file" name="file"/>
-		<button>Upload</button>
+		<button class= "btn-group">Upload</button>
 	</form>
 </body>

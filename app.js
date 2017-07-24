@@ -100,7 +100,7 @@ app.post("/upload", requireLoggedIn, upload.single('file'), function(req,res,nex
 
 
 app.get("/photos", function(req,res) {
-	Photo.findAll().then(function(photos) {
+	Photo.findAll({ limit: 7, order: [['updatedAt', 'DESC']]}).then(function(photos) {
 		console.log(photos);
 		res.render("photos", {
 			photos: photos,

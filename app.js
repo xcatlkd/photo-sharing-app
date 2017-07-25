@@ -77,10 +77,9 @@ app.get("/login", function(req,res) {
 });
 
 app.post("/login", function(req,res) {
-	console.log('LOGIN');
 	User.login(req,res).then(function(user) {
 		if (user) {
-			res.render("photos");
+			res.redirect("test");
 		} else {
 			res.redirect("404");
 		}
@@ -92,9 +91,17 @@ app.get("/upload", requireLoggedIn, function(req, res) {
 });
 
 app.post("/upload", requireLoggedIn, upload.single('file'), function(req,res,next) {
-	console.log('UPLOAD');
 	Photo.make(req).then(function() {
 		res.redirect("/photos");
+	});
+});
+
+app.get("/test", function(req,res) {
+	User.findById(req.session.userid)
+	.then(function(user) {
+	res.render("test", {
+		name: user.username
+	});
 	});
 });
 

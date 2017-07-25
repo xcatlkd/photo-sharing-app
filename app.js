@@ -54,7 +54,7 @@ app.get("/signup", function(req,res) {
 app.post("/signup", function(req,res) {
 	User.signup(req).then(function(user) {
 		if (user) {
-			res.redirect("/photos");
+			res.redirect("/test");
 		}
 		else {
 			res.redirect("signup");
@@ -126,8 +126,10 @@ app.post("/photos", function(req, res) {
 
 
 app.get("/logout", function(req,res) {
-	req.logout();
-	res.redirect("/");
+	req.session.destroy()
+	.then(function() {
+		res.redirect("/");
+	});
 });
 
 app.all("*", function(req, res) {

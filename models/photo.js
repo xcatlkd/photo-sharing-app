@@ -5,6 +5,7 @@ const Like = require("./like.js");
 const Jimp = require("jimp"); //
 const Comment = require("./comment.js");
 const fs = require("fs");
+const session = require("express-session");
 
 const Photo = sql.define("photo", {
 	id: {
@@ -29,6 +30,10 @@ const Photo = sql.define("photo", {
 	filename: {
 		type: Sequelize.STRING,
 		notNull: true,
+	},
+	userId: {
+		type: Sequelize.INTEGER,
+		notNull: true,
 	}
 	},
 
@@ -40,6 +45,7 @@ Photo.make = function(req) {
  		size: req.file.size,
  		originalName: req.file.originalname,
  		mimeType: req.file.mimetype,
+		userId: req.session.userid,
  	}).then(function() {
  		if (req.file.mimetype.includes("image/")) {
  			Jimp.read(req.file.path).then(function(img) {
@@ -49,6 +55,16 @@ Photo.make = function(req) {
  		}
  	});
  };
+
+Photo.searchByUser = function(req) {
+	 return Photo.findAll({
+		 where: {
+			 userId: req.session.id,
+		 },
+	 }).then(function() {
+		 console.log(this.userId);
+	 });
+};
 
 Photo.prototype.getThumbnailSrc = function() {
 	// Check if I have a thumbnail available in assets/thumbnails!

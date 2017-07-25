@@ -88,19 +88,7 @@ User.signup = function(req) {
 };
 
 User.login = function(req,res) {
-	return checkIdentity(req,res).then(function(isValid) {
-		if (isValid) {
-			res.render("test", {
-				name: req.body.username,
-			});
-		}
-		else {
-			res.status(400).send("Nope. Try Again");
-		}
-	}).catch(function(err) {
-		console.error(err);
-		res.status(500).send("Start Over");
-	});
+	return checkIdentity(req,res);
 };
 
 User.hasMany(Photo);
